@@ -1,4 +1,5 @@
 build/
+.vscode/
 .cache/
 sdkconfig.old
 managed_components/
