@@ -16,7 +16,7 @@ extern "C"{
 void bk_init();
 void lcd_init();
 void lvgl_init();
-
+void lvgl_loop_task(void *params);
 #ifdef __cplusplus
 }
 #endif
