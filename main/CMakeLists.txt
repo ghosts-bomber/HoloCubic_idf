@@ -1,12 +1,15 @@
 file(GLOB_RECURSE DRIVE_SRC ${CMAKE_SOURCE_DIR} "drives/*.c")
+file(GLOB_RECURSE SYSTEM_SRC ${CMAKE_SOURCE_DIR} "system/*.c" "system/*.cpp")
 
 idf_component_register(SRCS 
                     "main.cpp"
                     ${DRIVE_SRC}
+                    ${SYSTEM_SRC}
 
                     INCLUDE_DIRS 
                     "./"
                     "drives"
+                    "system"
 
                     REQUIRES
 

@@ -5,6 +5,7 @@
 static const char *TAG = "mpu6050:";
 
 static mpu6050_handle_t mpu6050 = NULL;
+
 static void i2c_bus_init(void) {
   i2c_config_t conf;
   conf.mode = I2C_MODE_MASTER;
@@ -22,17 +23,6 @@ static void i2c_bus_init(void) {
   ESP_ERROR_CHECK(ret);
 }
 
-static void i2c_sensor_mpu6050_init(void) {
-  esp_err_t ret;
-
-  i2c_bus_init();
-  mpu6050 = mpu6050_create(I2C_MASTER_NUM, MPU6050_I2C_ADDRESS);
-  ret = mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS);
-  ESP_ERROR_CHECK(ret);
-
-  ret = mpu6050_wake_up(mpu6050);
-  ESP_ERROR_CHECK(ret);
-}
 void mpu_init() {
   esp_err_t ret;
 
@@ -75,3 +65,4 @@ void mpu_read_task(void *param) {
   ret = i2c_driver_delete(I2C_MASTER_NUM);
   ESP_ERROR_CHECK(ret);
 }
+
