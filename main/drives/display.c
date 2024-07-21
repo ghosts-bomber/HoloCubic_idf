@@ -79,8 +79,8 @@ void lcd_init() {
       esp_lcd_new_panel_st7789(io_handle, &panel_config, &panel_handle));
   ESP_ERROR_CHECK(esp_lcd_panel_reset(panel_handle));
   ESP_ERROR_CHECK(esp_lcd_panel_init(panel_handle));
-
-  ESP_ERROR_CHECK(esp_lcd_panel_mirror(panel_handle, true, false));
+  ESP_ERROR_CHECK(esp_lcd_panel_invert_color(panel_handle,true));
+  ESP_ERROR_CHECK(esp_lcd_panel_mirror(panel_handle, false, false));
   ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(panel_handle, true));
 }
 
@@ -139,7 +139,7 @@ void lvgl_loop_task(void *params){
   while (1) {
     // raise the task priority of LVGL and/or reduce the handler period can
     // improve the performance
-    vTaskDelay(pdMS_TO_TICKS(20));
+    vTaskDelay(pdMS_TO_TICKS(30));
     // The task running lv_timer_handler should have lower priority than that
     // running `lv_tick_inc`
     lv_timer_handler();

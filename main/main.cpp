@@ -9,6 +9,7 @@
 #include <freertos/task.h>
 #include <nvs_flash.h>
 #include "app_controller.h"
+#include "menu.h"
 static const char *TAG = "main";
 
 static void init_nvs() {
@@ -27,17 +28,20 @@ extern "C" void app_main(void) {
   bk_init();
   lcd_init();
   lvgl_init();
-  TaskHandle_t lvgl_loop_task_handle;
-  xTaskCreate(lvgl_loop_task, "lvgl_loop", 256, NULL, 3,
-              &lvgl_loop_task_handle);
 
+  TaskHandle_t lvgl_loop_task_handle;
+  xTaskCreate(lvgl_loop_task, "lvgl_loop", 4096, NULL, 1,
+              &lvgl_loop_task_handle);
+ 
   mpu_init();
   TaskHandle_t mpu_read_task_handle;
-  xTaskCreate(mpu_read_task, "mpu_read", 512, NULL, 2, &mpu_read_task_handle);
+  xTaskCreate(mpu_read_task, "mpu_read", 2048, NULL, 2, &mpu_read_task_handle);
 
   ws2812_init();
-  ws2812_set_rgb(0, 212, 0, 0);
-
+  ws2812_set_rgb(0, 22, 0, 0);
+  ws2812_set_finish();
   AppContorller app_controller;
   app_controller.init();
+  
+  menu_init();
 }

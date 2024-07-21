@@ -1,6 +1,7 @@
 #include "mpu.h"
 #include "driver/i2c.h"
 #include "esp_err.h"
+#include "esp_log.h"
 #include "mpu6050.h"
 static const char *TAG = "mpu6050:";
 
@@ -59,6 +60,7 @@ void mpu_read_task(void *param) {
     ret = mpu6050_get_gyro(mpu6050, &gyro);
     ESP_ERROR_CHECK(ret);
     mpu6050_complimentory_filter(mpu6050, &acce, &gyro, &angle);
+    //ESP_LOGI(TAG,"pitch:%f roll:%f\n",angle.pitch,angle.roll);
     vTaskDelay(pdMS_TO_TICKS(10));
   }
   mpu6050_delete(mpu6050);

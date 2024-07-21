@@ -1,7 +1,7 @@
 #pragma once
 
 // GPIO assignment
-#define LED_STRIP_BLINK_GPIO  2
+#define LED_STRIP_BLINK_GPIO  27
 // Numbers of the LED in the strip
 #define LED_STRIP_LED_NUMBERS 1
 // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)
