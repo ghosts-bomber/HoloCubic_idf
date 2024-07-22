@@ -1,5 +1,8 @@
 #pragma once
 #include "control_action_interface.h"
+#ifdef __cplusplus
+extern "C"{
+#endif
 typedef struct  {
   const char *app_name;
   const void *app_image;
@@ -8,3 +11,6 @@ typedef struct  {
   int (*exit_callback)(void *param);
   int (*process_action)(const ControlAction* action);
 } APP_OBJ;
+#ifdef __cplusplus
+}
+#endif

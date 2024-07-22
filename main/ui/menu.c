@@ -11,6 +11,8 @@
 #include "misc/lv_style.h"
 #include "widgets/lv_img.h"
 #include <stdint.h>
+#include <esp_log.h>
+static const char *TAG = "menu:";
 LV_FONT_DECLARE(lv_font_montserrat_24);
 static lv_obj_t *app_scr = NULL;
 static lv_obj_t *app_scr_t = NULL;
@@ -49,6 +51,7 @@ void menu_init(void) {
   lv_obj_set_size(app_scr_t, 240, 240);
   lv_obj_align(app_scr_t, LV_ALIGN_CENTER, 0, 0);
   lv_scr_load(app_scr_t);
+  
 }
 
 void display_app_scr_init(const void *src_img_path, const char *app_name) {
@@ -58,14 +61,15 @@ void display_app_scr_init(const void *src_img_path, const char *app_name) {
     return;
   }
   lv_obj_clean(act_obj);
-  pre_app_image = lv_img_create(app_scr);
+  pre_app_image = lv_img_create(act_obj);
   pre_img_path = src_img_path;
   lv_img_set_src(pre_app_image, src_img_path);
   lv_obj_align(pre_app_image, LV_ALIGN_CENTER, 0, -20);
 
-  pre_app_name = lv_label_create(app_scr);
+  pre_app_name = lv_label_create(act_obj);
   lv_obj_add_style(pre_app_name, &app_name_style, LV_STATE_DEFAULT);
   lv_label_set_text(pre_app_name, app_name);
+  ESP_LOGI(TAG, "add label");
   lv_obj_align_to(pre_app_name, pre_app_image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
   lv_scr_load_anim(app_scr, LV_SCR_LOAD_ANIM_NONE, 300, 300, false);
 }

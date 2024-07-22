@@ -8,6 +8,7 @@ int AppContorller::app_install(APP_OBJ *app)
     if (!app)
         return -1;
     app_list_[app_num_++] = app;
+    if(cur_app_index_<0) cur_app_index_ = 0;
     return 0;
 }
 int AppContorller::app_uninstall(const APP_OBJ *app) { return 0; }
