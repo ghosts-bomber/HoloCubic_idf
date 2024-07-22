@@ -9,7 +9,7 @@
 #include <freertos/task.h>
 #include <nvs_flash.h>
 #include "app_controller.h"
-#include "menu.h"
+#include "app_controller_proxy.h"
 static const char *TAG = "main";
 
 static void init_nvs() {
@@ -40,8 +40,8 @@ extern "C" void app_main(void) {
   ws2812_init();
   ws2812_set_rgb(0, 22, 0, 0);
   ws2812_set_finish();
-  AppContorller app_controller;
-  app_controller.init();
+  static AppContorller app_controller;
+  static AppControllerProxy controller_proxy(&app_controller);
+  controller_proxy.init();
   
-  menu_init();
 }
