@@ -1,9 +1,9 @@
 #include "app_controller.h"
 
-AppContorller::AppContorller() {}
-AppContorller::~AppContorller() {}
-void AppContorller::init() {}
-int AppContorller::app_install(APP_OBJ *app)
+AppController::AppController() {}
+AppController::~AppController() {}
+void AppController::init() {}
+int AppController::app_install(APP_OBJ *app)
 {
     if (!app)
         return -1;
@@ -11,31 +11,31 @@ int AppContorller::app_install(APP_OBJ *app)
     if(cur_app_index_<0) cur_app_index_ = 0;
     return 0;
 }
-int AppContorller::app_uninstall(const APP_OBJ *app) { return 0; }
+int AppController::app_uninstall(const APP_OBJ *app) { return 0; }
 
-void AppContorller::enter_app(const APP_OBJ *app)
+void AppController::enter_app(const APP_OBJ *app)
 {
     if (app && app->app_init)
     {
-        (app->app_init)();
+        (app->app_init)(this);
         menu_ = false;
     }
 }
-void AppContorller::app_exit() {}
+void AppController::app_exit() {}
 
-void AppContorller::process_control(const ControlAction *action)
+void AppController::process_control(const ImuAction *action)
 {
     if(menu_){
 
     }else{
         auto app = cur_app();
-        if(app && app->process_action){
-            (app->process_action)(action);
+        if(app && app->main_process){
+            (app->main_process)(this,action);
         }
     }
 }
 
-APP_OBJ *AppContorller::next_app()
+APP_OBJ *AppController::next_app()
 {
     if (app_num_ == 0)
     {
@@ -54,7 +54,7 @@ APP_OBJ *AppContorller::next_app()
         return app_list_[cur_app_index_];
     }
 }
-APP_OBJ *AppContorller::pre_app()
+APP_OBJ *AppController::pre_app()
 {
     if (app_num_ == 0)
     {
@@ -73,7 +73,7 @@ APP_OBJ *AppContorller::pre_app()
         return app_list_[cur_app_index_];
     }
 }
-APP_OBJ* AppContorller::cur_app()
+APP_OBJ* AppController::cur_app()
 {
     if(app_num_==0){
         return nullptr;

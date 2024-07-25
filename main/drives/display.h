@@ -1,4 +1,7 @@
 #pragma once
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "common.h"
 #define PIN_NUM_BK_LIGHT (5)
 #define PIN_NUM_SCLK (18)
 #define PIN_NUM_MOSI (23)
@@ -13,6 +16,7 @@
 #ifdef __cplusplus
 extern "C"{
 #endif
+
 void bk_init();
 void lcd_init();
 void lvgl_init();

@@ -17,6 +17,7 @@
 #include "lvgl.h"
 #include "misc/lv_color.h"
 #include <stdint.h>
+SemaphoreHandle_t lvgl_mutex;
 #define LCD_HOST SPI2_HOST
 #define LVGL_TICK_PERIOD_MS 5
 static const char *TAG = "display:";
@@ -142,6 +143,7 @@ void lvgl_loop_task(void *params){
     vTaskDelay(pdMS_TO_TICKS(30));
     // The task running lv_timer_handler should have lower priority than that
     // running `lv_tick_inc`
+    //AIO_LVGL_OPERATE_LOCK(lv_timer_handler());
     lv_timer_handler();
   }
 }

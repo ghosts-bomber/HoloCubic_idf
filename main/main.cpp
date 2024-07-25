@@ -30,8 +30,8 @@ extern "C" void app_main(void) {
   lvgl_init();
 
   TaskHandle_t lvgl_loop_task_handle;
-  xTaskCreate(lvgl_loop_task, "lvgl_loop", 4096, NULL, 1,
-              &lvgl_loop_task_handle);
+  //xTaskCreate(lvgl_loop_task, "lvgl_loop", 4096, NULL, 1,
+   //           &lvgl_loop_task_handle);
  
   mpu_init();
   TaskHandle_t mpu_read_task_handle;
@@ -40,8 +40,8 @@ extern "C" void app_main(void) {
   ws2812_init();
   ws2812_set_rgb(0, 22, 0, 0);
   ws2812_set_finish();
-  static AppContorller app_controller;
+  static AppController app_controller;
   static AppControllerProxy controller_proxy(&app_controller);
   controller_proxy.init();
-  
+  lvgl_loop_task(NULL);
 }

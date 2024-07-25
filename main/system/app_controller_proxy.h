@@ -2,10 +2,10 @@
 #include "app_controller.h"
 class AppControllerProxy {
 public:
-  AppControllerProxy(AppContorller *controller);
+  AppControllerProxy(AppController *controller);
   ~AppControllerProxy();
 
   void init();
 private:
-  AppContorller *controller_ = nullptr;
+  AppController *controller_ = nullptr;
 };

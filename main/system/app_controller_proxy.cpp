@@ -4,14 +4,14 @@
 #include "esp_log.h"
 static const char *TAG = "AppControllerProxy:";
 
-AppControllerProxy::AppControllerProxy(AppContorller *controller)
+AppControllerProxy::AppControllerProxy(AppController *controller)
     : controller_(controller) {}
 
 AppControllerProxy::~AppControllerProxy() {}
 
 void AppControllerProxy::init() {
   controller_->init();
-  controller_->app_install(&weather_app);
+  controller_->app_install(&game_2048_app);
   menu_init();
   APP_OBJ* obj = controller_->cur_app();
   if(obj){

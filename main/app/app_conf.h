@@ -36,7 +36,7 @@
 #endif
 
 // 2048游戏APP
-#define APP_GAME_2048_USE 0
+#define APP_GAME_2048_USE 1
 #if APP_GAME_2048_USE
 #include "app/game_2048/game_2048.h"
 #endif
@@ -98,7 +98,7 @@
 
 // 天气APP
 // 如flash空间不够，首选配置天气app二选一，腾出大量flash空间
-#define APP_WEATHER_USE 1
+#define APP_WEATHER_USE 0
 #if APP_WEATHER_USE
 #include "app/weather/weather.h"
 #endif

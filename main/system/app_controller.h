@@ -2,17 +2,17 @@
 #include "app_interface.h"
 #include "control_action_interface.h"
 #define APP_MAX_NUM (32)
-class AppContorller
+class AppController
 {
 public:
-  AppContorller();
-  ~AppContorller();
+  AppController();
+  ~AppController();
   void init();
   int app_install(APP_OBJ *app);
   int app_uninstall(const APP_OBJ *app);
   void enter_app(const APP_OBJ *app);
   void app_exit();
-  void process_control(const ControlAction* action);
+  void process_control(const ImuAction* action);
   APP_OBJ* next_app();
   APP_OBJ* pre_app();
   APP_OBJ* cur_app();
